@@ -1,0 +1,13 @@
+## Deployed Contracts
+
+The following smart contracts are deployed on the [Lisk Sepolia Testnet](https://sepolia-blockscout.lisk.com/):
+
+| Contract              | Address                                                                                      | Blockscout Link                                                                                                      |
+|-----------------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| **PeerlyPond**        | `0x0e42c919eF6A83b00081fDB08e9BA2b1cEa1D7F9`                                                | [View on Blockscout](https://sepolia-blockscout.lisk.com/address/0x0e42c919eF6A83b00081fDB08e9BA2b1cEa1D7F9?tab=contract) |
+| **PeerlyIdentityNFT** | `0x383C2914E4221f6C671D61B58bb606dAF9Da10b2`                                                | [View on Blockscout](https://sepolia-blockscout.lisk.com/address/0x383C2914E4221f6C671D61B58bb606dAF9Da10b2?tab=contract) |
+| **PeerlyEscrow**      | `0xf81041E635C8c4a00ae2971903e182b55EeB5634`                                                | [View on Blockscout](https://sepolia-blockscout.lisk.com/address/0xf81041E635C8c4a00ae2971903e182b55EeB5634?tab=contract) |
+| **PeerlyTrust**       | `0x0954Ac3f7896337932B244a51fb7B5466090fD7B`                                                | [View on Blockscout](https://sepolia-blockscout.lisk.com/address/0x0954Ac3f7896337932B244a51fb7B5466090fD7B?tab=contract) |
+| **PeerlyReceiptNFT**  | `0x7Be2A5c11CA0A5d8905d3536D8861C7fE669Ba06`                                                | [View on Blockscout](https://sepolia-blockscout.lisk.com/address/0x7Be2A5c11CA0A5d8905d3536D8861C7fE669Ba06?tab=contract) |
+
+**Note:** Click on the contract name to view its details and verify the source code on Blockscout.
