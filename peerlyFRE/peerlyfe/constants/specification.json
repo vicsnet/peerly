@@ -1,0 +1,15 @@
+{
+    "product_type": "Footwear",
+    "SKU": "FA203FS4OKRBQNAFAMZ",
+    "Weight":"0.76",
+    "production_country":"Nigeria",
+    
+    "additionalSpecs": [
+        "Care Instructions: Hand wash only, air dry",
+        "Warranty: 1 year manufacturer warranty",
+        "Certification: ISO 9001 certified",
+        "Environmental: Eco-friendly materials",
+        "Shipping: Free shipping on orders over $50"
+    ]
+   
+}

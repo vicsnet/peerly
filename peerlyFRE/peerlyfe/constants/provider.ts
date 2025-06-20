@@ -1,0 +1,1 @@
+export const liskTestnetProvider = "https://rpc.sepolia-api.lisk.com"
