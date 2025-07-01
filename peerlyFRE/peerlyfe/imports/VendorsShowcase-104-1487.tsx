@@ -5,6 +5,7 @@ import imgImage from "figma:asset/f6b4606caf3f72f520d6e1147c88dded6a21d932.png";
 import imgImage1 from "figma:asset/446366073728d966f17b0fa373f456b22e48603f.png";
 import imgImage2 from "figma:asset/2c881a821d59de7adc715e03a2cb0bdcae96d9e2.png";
 import { imgGroup } from "./svg-2h2ep";
+import Image from "next/image";
 type BackgroundImage75Props = {
   additionalClassNames?: string[];
 };
@@ -320,8 +321,8 @@ function Button1() {
 function Avatar() {
   return (
     <div className="relative shrink-0 size-10" data-name="avatar">
-      <img
-        alt
+      <Image
+        alt=''
         className="block max-w-none size-full"
         height="40"
         src={imgAvatar}

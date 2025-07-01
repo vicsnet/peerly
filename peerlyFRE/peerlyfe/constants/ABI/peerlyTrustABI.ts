@@ -1,4 +1,4 @@
-export const peerlyTrust = [
+export const peerlyTrustABI = [
   {
     "inputs": [
       {

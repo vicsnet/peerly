@@ -1,42 +1,59 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import { Logo } from "./Logo";
 import { Button } from "./ui/button";
-import { CartIndicator } from "./CartIndicator";
+// import { CartIndicator } from "./CartIndicator";
 import { UserDropdown } from "./UserDropdown";
 import { toast } from "sonner";
 import { client } from "@/lib/configThirdweb";
 import { ConnectButton, useActiveWallet, useDisconnect } from "thirdweb/react";
-import { User } from "@/types/user";
+// import { User } from "@/types/user";
 import { useUser, usePagesState } from "@/contexts/zustand/ZustandState";
+// import { inAppWallet } from "thirdweb/wallets";
+// import { defineChain} from "thirdweb/chains"
+import { useRouter }  from "next/router";
 
-interface NavBarProps {
-  // onLoginClick: () => void;
-  // onStartSellingClick?: () => void;
-  // onCartClick?: () => void;
-  // user?: User | null;
-  // onSignOut?: () => void;
-  // onProfileClick?: () => void;
-  // onOrdersClick?: () => void;
-  // onTransactionsClick?: () => void;
-}
+// interface NavBarProps {
+//   // onLoginClick: () => void;
+//   // onStartSellingClick?: () => void;
+//   // onCartClick?: () => void;
+//   // user?: User | null;
+//   // onSignOut?: () => void;
+//   // onProfileClick?: () => void;
+//   // onOrdersClick?: () => void;
+//   // onTransactionsClick?: () => void;
+// }
 
-export function NavBar({
-  // onLoginClick,
-  // onStartSellingClick,
-  // onCartClick,
-  // user,
-  // onSignOut,
-  // onProfileClick,
-  // onOrdersClick,
-  // onTransactionsClick,
-}: NavBarProps) {
+export function NavBar(
+//   {
+//   // onLoginClick,
+//   // onStartSellingClick,
+//   // onCartClick,
+//   // user,
+//   // onSignOut,
+//   // onProfileClick,
+//   // onOrdersClick,
+//   // onTransactionsClick,
+// }: NavBarProps
+
+) {
   const {currentUser: user, setCurrentUser} = useUser();
+  // const myChain = defineChain(4202)
 
+  const router = useRouter();
   console.log('user@', user);
   
   const {setCurrentPage} = usePagesState();
 
   const wallet = useActiveWallet();
+
+  // const wallets = [
+  //   inAppWallet({
+  //     smartAccount: {
+  //       chain: myChain,
+  //       sponsorGas: true,
+  //     },
+  //   }),
+  // ];
   const { disconnect } = useDisconnect();
 
   const handleSignOut = () => {
@@ -62,6 +79,8 @@ export function NavBar({
           setCurrentPage("seller-dashboard");
           // setDashboardPage("settings");
         } else {
+          console.log(`clicked2`);
+          
           // For regular buyers, navigate to profile page
           setCurrentPage("profile");
         }
@@ -182,15 +201,29 @@ export function NavBar({
                 <ConnectButton client={client}  appMetadata={{
               name: "Example App",
               url: "https://example.com",
-            }}/>
-                <Button
-                  // onClick={onStartSellingClick || (() => {})}
-                  className="bg-slate-900 hover:bg-slate-800 text-white text-sm"
+            }} 
+            // wallets={wallets}
+            />
+               
+              </>
+            )} 
+            {
+              user?.isSeller  ? 
+              <Button
+              onClick={()=>router.push("shop/")}
+              className="bg-slate-900 hover:bg-slate-800 text-white text-sm cursor-pointer"
+            >
+              Go to Shop
+            </Button>
+            :
+             <Button
+                  onClick={()=>router.push("/selling")}
+                  className="bg-slate-900 hover:bg-slate-800 text-white text-sm cursor-pointer"
                 >
                   Start Selling
                 </Button>
-              </>
-            )} 
+
+            }
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { client } from "@/lib/configThirdweb";
 import { defineChain } from "thirdweb/chains";
 import {peerlyEscrow, peerlyPond, peerlyTrust, peerlyIdentityNFT, peerlyReceipt} from "@/constants/contract"
 import {peerlyPondABI} from "@/constants/ABI/peerlyPondABI"
+import { peerlyEscrowABI } from '@/constants/ABI/peerlyEscrowABI';
 
 
 export default function useReadGetContract() {
@@ -12,6 +13,7 @@ export default function useReadGetContract() {
     const PeerlyEscrowContract  = getContract({
         client,
         address: peerlyEscrow,
+        abi:peerlyEscrowABI,
         chain: liskSepolia,
       });
 

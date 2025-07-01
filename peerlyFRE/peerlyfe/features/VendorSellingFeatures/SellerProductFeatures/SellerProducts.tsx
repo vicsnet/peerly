@@ -5,112 +5,148 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { ImageWithFallback } from "../../../components/figma/ImageWithFallback";
 import { Plus, Search } from "lucide-react";
 import { AddProductModal } from "./components/AddProductModal";
-import { EditProductModal } from "../SellerProductDetailsFeature/components/EditProductModal";
-import { DeleteProductModal } from "../SellerProductDetailsFeature/components/DeleteProductModal";
-import { useProducts, Product } from "../../../contexts/ProductContext";
+// import { EditProductModal } from "../SellerProductDetailsFeature/components/EditProductModal";
+// import { DeleteProductModal } from "../SellerProductDetailsFeature/components/DeleteProductModal";
+// import { useProducts, Product } from "../../../contexts/ProductContext";
 import { CustomToggle } from "../../../components/ui/custom-toggle";
+import { EditProductModalNew } from "../SellerProductDetailsFeature/components/EditProductModalNew";
+import { DeleteProductModalNew } from "../SellerProductDetailsFeature/components/DeleteProductModalNew";
 
-interface SellerProductsProps {
-  vendorId: number;
-  onProductSelect?: (productId: number) => void;
-  products?: Product[];
-  onToggleStatus?: (productId: number, isActive: boolean) => void;
-  onAddProduct?: (product: Omit<Product, "id" | "createdAt">) => void;
+// interface SellerProductsProps {
+//   vendorId: number;
+//   onProductSelect?: (productId: number) => void;
+//   products?: Product[];
+//   onToggleStatus?: (productId: number, isActive: boolean) => void;
+//   onAddProduct?: (product: Omit<Product, "id" | "createdAt">) => void;
+// }
+// type Product = {
+//   id: number;
+//   name: string;
+//   price: number;
+//   discountPrice?: number;
+//   images: string[];
+//   category: string;
+//   description: string;
+//   inventory: number;
+//   vendorId: number;
+//   vendorName: string;
+//   rating?: number;
+//   reviewCount?: number;
+//   inStock: boolean;
+//   discount?: number;
+
+//   // Product specifications
+//   sku?: string;
+//   productLine?: string;
+//   model?: string;
+//   productionCountry?: string;
+//   dimensions?: string; // L x W x H cm
+//   weight?: string; // in kg
+//   color?: string;
+//   material?: string;
+
+//   // Variants (size, color options, etc.)
+//   variants?: {
+//     name: string;
+//     options: string[];
+//   }[];
+// }
+
+type Product = {
+  productId: string;
+  productName: string;
+  productDescription: string,
+  productImage: string[];
+  price: string;
+  totalStock: string;
+  sold: string;
+  specification:string;
 }
+
 
 type StatusFilter = "all" | "active" | "inactive";
 type StockFilter = "all" | "in-stock" | "low-stock" | "out-of-stock";
 
-export function SellerProducts({ 
-  vendorId, 
-  onProductSelect,
-  products: externalProducts,
-  onToggleStatus,
-  onAddProduct
-}: SellerProductsProps) {
-  const { getProductsByVendor, addProduct: contextAddProduct, updateProduct } = useProducts();
+export function SellerProducts({ vendorProduct, vendorId, onProductSelect }: { vendorProduct: any; vendorId: string; onProductSelect?: (productId: number) => void }) {
+  // const { getProductsByVendor, addProduct: contextAddProduct, updateProduct } = useProducts();
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
   const [stockFilter, setStockFilter] = useState<StockFilter>("all");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const [selectedProductName, setSelectedProductName] = useState("");
-  const [products, setProducts] = useState<Product[]>([]);
-  
-  // Load seller's products when vendorId changes or when products are updated
+  const [products, setProducts] = useState<Product[]>(vendorProduct || []);
+
+  // Sync products state with vendorProduct prop
   useEffect(() => {
-    if (externalProducts) {
-      // Use externally provided products if available
-      setProducts(externalProducts);
-    } else {
-      // Otherwise load from context
-      const vendorProducts = getProductsByVendor(vendorId);
-      setProducts(vendorProducts);
-    }
-  }, [vendorId, externalProducts, getProductsByVendor]);
-  
+    setProducts(vendorProduct || []);
+  }, [vendorProduct]);
+
   // Filter products based on search query, status, and stock filters
-  const filteredProducts = products.filter(product => {
-    // Search filter
-    const matchesSearch = searchQuery === "" || 
-                          product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          product.description.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    // Status filter - using inventory as a proxy for active status
-    const isActive = product.inventory > 0;
-    const matchesStatus = statusFilter === "all" || 
-                         (statusFilter === "active" && isActive) ||
-                         (statusFilter === "inactive" && !isActive);
-    
-    // Stock filter
-    const matchesStock = stockFilter === "all" || 
-                        (stockFilter === "in-stock" && product.inventory > 10) ||
-                        (stockFilter === "low-stock" && product.inventory > 0 && product.inventory <= 10) ||
-                        (stockFilter === "out-of-stock" && product.inventory === 0);
-    
-    return matchesSearch && matchesStatus && matchesStock;
-  });
-  
+  // Ensure products is always an array before calling filter to avoid TypeError
+  const filteredProducts = Array.isArray(products)
+    ? products.filter(product => {
+        // Search filter
+        const matchesSearch = searchQuery === "" ||
+          (product.productName && product.productName.toLowerCase().includes(searchQuery.toLowerCase())) ||
+          (product.productDescription && product.productDescription.toLowerCase().includes(searchQuery.toLowerCase()));
+
+        // Status filter - using inventory as a proxy for active status
+        const isActive = Number(product.totalStock) > 0;
+        const matchesStatus = statusFilter === "all" ||
+          (statusFilter === "active" && isActive) ||
+          (statusFilter === "inactive" && !isActive);
+
+        // Stock filter
+        const matchesStock = stockFilter === "all" ||
+          (stockFilter === "in-stock" && Number(product.totalStock) > 10) ||
+          (stockFilter === "low-stock" && Number(product.totalStock) > 0 && Number(product.totalStock) <= 10) ||
+          (stockFilter === "out-of-stock" && Number(product.totalStock) === 0);
+
+        return matchesSearch && matchesStatus && matchesStock;
+      })
+    : [];
+
   // Handle product active status toggle
-  const handleToggleStatus = (productId: number, isActive: boolean) => {
-    if (onToggleStatus) {
-      // Use the external handler if provided
-      onToggleStatus(productId, isActive);
-    } else {
-      // Otherwise handle it internally
-      const product = products.find(p => p.id === productId);
-      if (product) {
-        updateProduct({
-          ...product,
-          inventory: isActive ? product.inventory : 0,
-          active: isActive
-        });
-      }
-    }
+  const handleToggleStatus = (productId: string, isActive: boolean) => {
+    // if (onToggleStatus) {
+    //   // Use the external handler if provided
+    //   onToggleStatus(productId, isActive);
+    // } else {
+    //   // Otherwise handle it internally
+    //   const product = products.find(p => p.id === productId);
+    //   if (product) {
+    //     updateProduct({
+    //       ...product,
+    //       inventory: isActive ? product.inventory : 0,
+    //       active: isActive
+    //     });
+    //   }
+    // }
   };
-  
+
   // Handle opening the edit modal
-  const handleEditClick = (productId: number) => {
+  const handleEditClick = (productId: string) => {
     setSelectedProductId(productId);
     setIsEditModalOpen(true);
   };
-  
+
   // Handle opening the delete modal
-  const handleDeleteClick = (productId: number, productName: string) => {
+  const handleDeleteClick = (productId: string, productName: string) => {
     setSelectedProductId(productId);
     setSelectedProductName(productName);
     setIsDeleteModalOpen(true);
   };
-  
+
   // Handle product select
-  const handleProductClick = (productId: number) => {
+  const handleProductClick = (productId: string) => {
     if (onProductSelect) {
-      onProductSelect(productId);
+      onProductSelect(Number(productId));
     }
   };
-  
+
   // Create chunks of 3 products for the grid layout
   const productChunks = [];
   for (let i = 0; i < filteredProducts.length; i += 3) {
@@ -138,7 +174,7 @@ export function SellerProducts({
                 />
               </div>
             </div>
-            
+
             {/* Status filter */}
             <div className="relative w-[120px] bg-white rounded-md">
               <Select value={statusFilter} onValueChange={(value) => setStatusFilter(value as StatusFilter)}>
@@ -152,7 +188,7 @@ export function SellerProducts({
                 </SelectContent>
               </Select>
             </div>
-            
+
             {/* Stock filter */}
             <div className="relative w-[120px] bg-white rounded-md">
               <Select value={stockFilter} onValueChange={(value) => setStockFilter(value as StockFilter)}>
@@ -168,9 +204,9 @@ export function SellerProducts({
               </Select>
             </div>
           </div>
-          
+
           {/* Add Product button */}
-          <Button 
+          <Button
             onClick={() => setIsAddModalOpen(true)}
             className="bg-slate-900 hover:bg-slate-800 flex items-center gap-2 px-4 py-3 rounded-md"
           >
@@ -179,7 +215,7 @@ export function SellerProducts({
           </Button>
         </div>
       </div>
-      
+
       {/* Products grid */}
       <div className="bg-white p-6">
         {filteredProducts.length > 0 ? (
@@ -187,46 +223,46 @@ export function SellerProducts({
             {productChunks.map((chunk, chunkIndex) => (
               <div key={chunkIndex} className="flex flex-row gap-4 w-full">
                 {chunk.map(product => (
-                  <div 
-                    key={product.id}
+                  <div
+                    key={String(product.productId)}
                     className="flex-1 basis-0 bg-white border border-slate-100 rounded-2xl overflow-hidden min-w-0 grow"
                   >
                     <div className="p-4">
                       <div className="flex flex-col gap-2">
                         {/* Top row with image and toggle */}
                         <div className="flex justify-between items-start w-full">
-                          <div 
+                          <div
                             className="h-12 w-12 bg-slate-100 rounded-lg overflow-hidden cursor-pointer"
-                            onClick={() => handleProductClick(product.id)}
+                            onClick={() => handleProductClick(String(product.productId))}
                           >
                             <ImageWithFallback
-                              src={product.featuredImage || product.images[0]}
-                              alt={product.name}
+                              src={Array.isArray(product.productImage) && product.productImage.length > 0 ? product.productImage[0] : ''}
+                              alt={product.productName}
                               className="h-full w-full object-cover"
                             />
                           </div>
-                          
+
                           {/* Custom toggle that matches the Figma design */}
                           <CustomToggle
-                            checked={product.active || product.inventory > 0}
-                            onCheckedChange={(checked) => handleToggleStatus(product.id, checked)}
+                            checked={Number(product.totalStock) > 0}
+                            onCheckedChange={(checked) => handleToggleStatus(String(product.productId), checked)}
                           />
                         </div>
-                        
+
                         {/* Product details */}
-                        <div 
+                        <div
                           className="cursor-pointer w-full"
-                          onClick={() => handleProductClick(product.id)}
+                          onClick={() => handleProductClick(String(product.productId))}
                         >
-                          <h3 className="font-semibold text-[18px] text-gray-900 line-clamp-1">{product.name}</h3>
-                          <p className="text-[14px] text-gray-900 line-clamp-1">{product.description}</p>
-                          
+                          <h3 className="font-semibold text-[18px] text-gray-900 line-clamp-1">{product.productName}</h3>
+                          <p className="text-[14px] text-gray-900 line-clamp-1">{product.productDescription}</p>
+
                           <div className="flex justify-between items-center mt-2">
                             <span className="font-medium text-[16px] text-gray-900 whitespace-nowrap">
-                              ${product.discountPrice?.toFixed(2) || product.price.toFixed(2)}
+                              ${Number(product.price).toFixed(2)}
                             </span>
                             <span className="text-[12px] text-gray-900 whitespace-nowrap">
-                              {product.inventory} in stock
+                              {product.totalStock} in stock
                             </span>
                           </div>
                         </div>
@@ -234,7 +270,7 @@ export function SellerProducts({
                     </div>
                   </div>
                 ))}
-                
+
                 {/* Add empty placeholder divs to maintain grid alignment when row isn't full */}
                 {Array(3 - chunk.length).fill(0).map((_, i) => (
                   <div key={`empty-${i}`} className="flex-1 basis-0" />
@@ -252,29 +288,30 @@ export function SellerProducts({
           </div>
         )}
       </div>
-      
+
       {/* Add Product Modal */}
       <AddProductModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
         vendorId={vendorId}
       />
-      
+
       {/* Edit Product Modal */}
       {selectedProductId && (
-        <EditProductModal
+        <EditProductModalNew
           isOpen={isEditModalOpen}
+          vendorId={vendorId}
           onClose={() => setIsEditModalOpen(false)}
-          productId={selectedProductId}
+          productId={Number(selectedProductId)}
         />
       )}
-      
+
       {/* Delete Product Modal */}
       {selectedProductId && (
-        <DeleteProductModal
+        <DeleteProductModalNew
           isOpen={isDeleteModalOpen}
           onClose={() => setIsDeleteModalOpen(false)}
-          productId={selectedProductId}
+          productId={Number(selectedProductId)}
           productName={selectedProductName}
         />
       )}

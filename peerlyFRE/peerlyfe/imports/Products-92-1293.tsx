@@ -3,6 +3,7 @@ import clsx from "clsx";
 import imgAvatar from "figma:asset/5bee9393a6a3a30c7f2cff6dab100b8b77601184.png";
 import imgImage from "figma:asset/7c807da69baa842ba6d039b54e026abb98d01708.png";
 import { imgGroup } from "./svg-inlxn";
+import Image from "next/image";
 type TextBackgroundImageProps = {
   additionalClassNames?: string[];
 };
@@ -497,8 +498,8 @@ function Section() {
 function Avatar() {
   return (
     <div className="relative shrink-0 size-8" data-name="avatar">
-      <img
-        alt
+      <Image
+        alt=''
         className="block max-w-none size-full"
         height="32"
         loading="lazy"

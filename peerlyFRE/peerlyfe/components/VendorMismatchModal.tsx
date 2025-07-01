@@ -15,8 +15,8 @@ interface VendorMismatchModalProps {
   isOpen: boolean;
   onClose: () => void;
   onClearCart: () => void;
-  onClearCartAndBuyNow?: () => void;
-  currentVendorName: string;
+  // onClearCartAndBuyNow?: () => void;
+  // currentVendorName: string;
 onClearCartAndBuyNow?: () => void;
   currentVendorName: string;
 }

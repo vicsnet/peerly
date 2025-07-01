@@ -5,6 +5,7 @@ import imgAvatar1 from "figma:asset/736cb115ec106be6d83ed7f4df294363af5d6c6d.png
 import imgImage from "figma:asset/6e4efb602de83ba81d065532203d6f1d1374a8ff.png";
 import imgImage1 from "figma:asset/f405e12dc8c15ed1474c1318f47ca279ef375e1f.png";
 import { imgGroup } from "./svg-undys";
+import Image from "next/image";
 type BackgroundImage102Props = {
   additionalClassNames?: string[];
 };
@@ -341,8 +342,8 @@ function Button() {
 function Avatar() {
   return (
     <div className="relative shrink-0 size-10" data-name="avatar">
-      <img
-        alt
+      <Image
+        alt=''
         className="block max-w-none size-full"
         height="40"
         src={imgAvatar}
@@ -419,8 +420,8 @@ function MenuItem() {
 function Avatar1() {
   return (
     <div className="relative shrink-0 size-[120px]" data-name="avatar">
-      <img
-        alt
+      <Image
+        alt=''
         className="block max-w-none size-full"
         height="120"
         src={imgAvatar1}

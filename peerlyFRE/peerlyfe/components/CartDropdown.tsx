@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import svgPaths from "../imports/svg-woc6yv4a3i";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useCart } from "../contexts/CartContext";
 import { MultiItemOrderSummaryModal } from "./MultiItemOrderSummaryModal";
 import { toast } from "sonner";
+import type { CartItem } from '../contexts/CartContext';
 
 interface CartDropdownProps {
   isOpen: boolean;
   onClose: () => void;
-  onCheckout: () => void;
 }
 
 type BackgroundImage137Props = {
@@ -26,7 +25,7 @@ function BackgroundImage137({
   );
 }
 
-function ContainerBackgroundImage({ children }: React.PropsWithChildren<{}>) {
+function ContainerBackgroundImage({ children }: React.PropsWithChildren<object>) {
   return (
     <div className="flex-1 min-w-0 relative">
       <div className="box-border flex flex-row gap-3 items-center justify-start p-0 relative size-full">
@@ -36,7 +35,7 @@ function ContainerBackgroundImage({ children }: React.PropsWithChildren<{}>) {
   );
 }
 
-function ProductBackgroundImage({ children }: React.PropsWithChildren<{}>) {
+function ProductBackgroundImage({ children }: React.PropsWithChildren<object>) {
   return (
     <BackgroundImage137 additionalClassNames={["rounded-xl"]}>
       <div className="absolute border border-slate-100 inset-0 pointer-events-none rounded-xl" />
@@ -126,7 +125,14 @@ function TextBackgroundImage1({ text, text1 }: TextBackgroundImage1Props) {
   );
 }
 
-function Container({ productImage, productName, productPrice, onRemove, quantity }: {
+function Container({
+   productImage, 
+   productName, 
+   productPrice,
+    // onRemove, 
+    // quantity
+
+   }: {
   productImage: string;
   productName: string;
   productPrice: string;
@@ -226,7 +232,7 @@ function Text9({ onClose }: { onClose: () => void }) {
 }
 
 function Carts({ cartItems, onRemoveItem }: {
-  cartItems: any[];
+  cartItems: CartItem[];
   onRemoveItem: (id: number) => void;
 }) {
   if (!cartItems || cartItems.length === 0) {
@@ -244,7 +250,7 @@ function Carts({ cartItems, onRemoveItem }: {
       <div className="box-border flex flex-col gap-4 items-start justify-start p-0 relative w-full">
         {cartItems.map((item) => (
           <Product
-            key={`${item.id}-${JSON.stringify(item.variants || '')}`}
+            key={item.id}
             productImage={item.image}
             productName={item.name}
             productPrice={`$${(item.price * item.quantity).toFixed(0)}`}
@@ -280,7 +286,7 @@ function Text13({ total }: { total: number }) {
 }
 
 function Content1({ cartItems, onRemoveItem, total }: {
-  cartItems: any[];
+  cartItems: CartItem[];
   onRemoveItem: (id: number) => void;
   total: number;
 }) {
@@ -392,7 +398,7 @@ function Actions({ onCheckout, onClearAll, hasItems }: {
   );
 }
 
-export function CartDropdown({ isOpen, onClose, onCheckout }: CartDropdownProps) {
+export function CartDropdown({ isOpen, onClose }: CartDropdownProps) {
   const { items, removeFromCart, clearCart, totalPrice } = useCart();
   const [isOrderSummaryOpen, setIsOrderSummaryOpen] = useState(false);
 

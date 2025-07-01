@@ -364,20 +364,20 @@ export function OrderDetail({ orderId, onBack }: OrderDetailProps) {
                     <p>{order.shippingAddress.country}</p>
                   </div>
                 </div>
-
+{/* 
                 {order.estimatedDelivery && order.status !== "delivered" && order.status !== "cancelled" && (
                   <div>
                     <h4 className="font-medium text-gray-900 mb-2">Estimated Delivery</h4>
                     <p className="text-sm text-gray-600">{formatDate(order.estimatedDelivery)}</p>
                   </div>
-                )}
-
+                )} */}
+{/* 
                 {order.deliveryDate && order.status === "delivered" && (
                   <div>
                     <h4 className="font-medium text-gray-900 mb-2">Delivered On</h4>
                     <p className="text-sm text-gray-600">{formatDate(order.deliveryDate)}</p>
                   </div>
-                )}
+                )} */}
               </CardContent>
             </Card>
 

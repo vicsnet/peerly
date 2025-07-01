@@ -6,7 +6,7 @@ import { X } from "lucide-react";
 // import imgLogoPng from "figma:asset/680449e5dac08f498764fbd6cda12356a66374b2.png";
 // import imgLogoPng from "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=2070";
 import { imgGroup } from "../imports/svg-5mh2g";
-import svgPaths from "../imports/svg-baymwh3e0j";
+// import svgPaths from "../imports/svg-baymwh3e0j";
 
 interface SignInProps {
   onSignIn: () => void;
@@ -59,7 +59,7 @@ export function SignIn({ onSignIn, onSignUp, onClose, isSellerFlow = false }: Si
             {/* Right side with sign up link and close button */}
             <div className="flex items-center gap-6">
               <div className="text-[14px] text-gray-500">
-                Don't have an account? 
+                Don&#39t have an account? 
                 <span 
                   onClick={onSignUp}
                   className="underline font-semibold text-gray-900 ml-1 cursor-pointer"

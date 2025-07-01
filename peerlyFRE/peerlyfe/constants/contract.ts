@@ -1,12 +1,13 @@
-export const peerlyIdentityNFT = "0x383C2914E4221f6C671D61B58bb606dAF9Da10b2";
+export const peerlyIdentityNFT = "0x8cF95deb307cE5d803705981b7B068AD6Ba1E62a";
 
-export const peerlyEscrow = "0xf81041E635C8c4a00ae2971903e182b55EeB5634";
+export const peerlyEscrow = "0x3511f2F0e664b8399a0BB72890eBD989aBE87578";
 
-export const peerlyTrust = "0x0954Ac3f7896337932B244a51fb7B5466090fD7B";
+export const peerlyTrust = "0x993583D06733AD0da369c9aF8d22fb8195a4B283";
 
-export const peerlyPond = "0x0e42c919eF6A83b00081fDB08e9BA2b1cEa1D7F9";
+export const peerlyPond = "0x4c9e8333Ee2Cd3D8a201a1E5D287000566Aa37BB";
 
-export const peerlyReceipt = "0x7Be2A5c11CA0A5d8905d3536D8861C7fE669Ba06";
+export const peerlyReceipt = "0xD58bFe145a7B8729DeA4C1838a86363a58DC469a";
+
 
 
 

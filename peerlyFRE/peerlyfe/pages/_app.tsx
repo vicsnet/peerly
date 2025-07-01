@@ -2,11 +2,11 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { ThirdwebProvider, ChainProvider } from "thirdweb/react";
-import {sepolia, defineChain} from "thirdweb/chains"
+import {defineChain} from "thirdweb/chains"
 import {
   QueryClient,
   QueryClientProvider,
-  useQuery,
+  // useQuery,
 } from '@tanstack/react-query'
 import { Toaster } from "sonner";
 

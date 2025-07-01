@@ -30,7 +30,7 @@ function BackgroundImage298({
   );
 }
 
-function BackgroundImage245({ children }: React.PropsWithChildren<{}>) {
+function BackgroundImage245({ children }: React.PropsWithChildren<object>) {
   return (
     <BackgroundImage298>
       <div className="box-border flex flex-col gap-2 items-start justify-start p-0 relative w-full">

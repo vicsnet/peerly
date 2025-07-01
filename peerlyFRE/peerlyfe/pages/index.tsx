@@ -1,22 +1,22 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { VendorShowcase } from "@/features/VendorFeature/VendorShowcase";
-import { ProductsPage } from "@/features/ProductFeature/ProductsPage";
-import { ProductDetail } from "@/features/ProductDetailFeature/ProductDetail";
+// import { ProductsPage } from "@/features/ProductFeature/ProductsPage";
+// import { ProductDetail } from "@/features/ProductDetailFeature/ProductDetail";
 import { SignIn } from "@/components/SignIn";
 import { SignUp } from "@/components/SignUp";
 import { BusinessRegistration } from "@/components/BusinessRegistration";
 import { BusinessImages } from "@/components/BusinessImages";
-import { SellerDashboard } from "@/features/VendorSellingFeatures/SellerDashboardFeature/SellerDashboard";
-import { EscrowPortal } from "@/features/EscrowPortalFeature/EscrowPortal";
+// import { SellerDashboard } from "@/features/VendorSellingFeatures/SellerDashboardFeature/SellerDashboard";
+// import { EscrowPortal } from "@/features/EscrowPortalFeature/EscrowPortal";
 import { MultiItemOrderSummaryModal } from "@/components/MultiItemOrderSummaryModal";
-import { Profile } from "@/features/ProfileFeature/Profile";
+// import { Profile } from "@/features/ProfileFeature/Profile";
 import { Orders } from "@/features/OrdersFeature/Orders";
 import { OrderDetail } from "@/features/OrderDetailFeatures/OrderDetail";
 import { Transactions } from "@/features/TransactionsFeature/Transactions";
-import { CartProvider } from "@/contexts/CartContext";
-import { ProductProvider } from "@/contexts/ProductContext";
+// import { CartProvider } from "@/contexts/CartContext";
+// import { ProductProvider } from "@/contexts/ProductContext";
 import { Toaster } from "sonner";
-import { DialogProvider } from "@/contexts/DialogContext";
+// import { DialogProvider } from "@/contexts/DialogContext";
 // import { useQueryClient } from "@tanstack/react-query";
 // import { useWeb3AuthConnect } from "@web3auth/modal/react";
 import { useActiveAccount, useProfiles, useDisconnect, useActiveWallet } from "thirdweb/react";
@@ -24,7 +24,7 @@ import { client } from "@/lib/configThirdweb";
 import { User } from "@/types/user";
 // import peerlyPondABI from "@/constants/ABI/peerlyPondABI"
 import useReadGetContract from "@/hooks/useReadGetContract"
-import {peerlyPond} from "@/constants/contract"
+// import {peerlyPond} from "@/constants/contract"
 
 import { useReadContract } from "thirdweb/react";
 import {useUser} from "@/contexts/zustand/ZustandState"
@@ -142,10 +142,10 @@ export default function App() {
 
 
 
-  const { data: status, isLoading: status_loading } = useReadContract({
+  const { data: status } = useReadContract({
     contract: PeerlyPondContract,
     method: "getSeller",
-    params: [account?.address], // default safe address
+    params: [account?.address ?? ''], // default safe address
     // enabled: isReady,
   });
 
@@ -170,14 +170,17 @@ export default function App() {
   // const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   const handleVendorSelect = (vendorId: number) => {
+    console.log(businessName, dashboardPage,selectedProduct,activeEscrowId, selectedVendor);
+    setSelectedProduct(1)
+    
     setSelectedVendor(vendorId);
     setCurrentPage("products");
   };
 
-  const handleProductSelect = (productId: number) => {
-    setSelectedProduct(productId);
-    setCurrentPage("product-detail");
-  };
+  // const handleProductSelect = (productId: number) => {
+  //   setSelectedProduct(productId);
+  //   setCurrentPage("product-detail");
+  // };
 
   const handleBackToVendors = () => {
     setCurrentPage("vendors");
@@ -185,27 +188,27 @@ export default function App() {
     setIsSellerFlow(false);
   };
 
-  const handleBackToProducts = () => {
-    setCurrentPage("products");
-  };
+  // const handleBackToProducts = () => {
+  //   setCurrentPage("products");
+  // };
 
   const handleBackToOrders = () => {
     setCurrentPage("orders");
   };
 
-  const handleBackToTransactions = () => {
-    setCurrentPage("transactions");
-  };
+  // const handleBackToTransactions = () => {
+  //   setCurrentPage("transactions");
+  // };
 
-  const handleLoginClick = () => {
-    // Regular login for buyers
-    setIsSellerFlow(false);
-    // connect();
-    console.log('clicked')
+  // const handleLoginClick = () => {
+  //   // Regular login for buyers
+  //   setIsSellerFlow(false);
+  //   // connect();
+  //   console.log('clicked')
 
-    setCurrentPage("signin");
+  //   setCurrentPage("signin");
 
-  };
+  // };
 
   const handleSignUpClick = () => {
     setCurrentPage("signup");
@@ -309,9 +312,9 @@ export default function App() {
   };
 
   // Navigation to specific seller dashboard page
-  const handleSellerDashboardNav = (page: DashboardPage) => {
-    setDashboardPage(page);
-  };
+  // const handleSellerDashboardNav = (page: DashboardPage) => {
+  //   setDashboardPage(page);
+  // };
 
   // Handler for navigating to the escrow portal
   const handleViewEscrowPortal = (escrowId: string) => {
@@ -320,16 +323,16 @@ export default function App() {
   };
 
   // Handler for going back from escrow portal to appropriate page
-  const handleBackFromEscrowPortal = () => {
-    // Check if user is a seller or came from transactions page
-    if (currentUser?.isSeller) {
-      setCurrentPage("seller-dashboard");
-      setDashboardPage("transactions");
-    } else {
-      setCurrentPage("transactions");
-    }
-    setActiveEscrowId("");
-  };
+  // const handleBackFromEscrowPortal = () => {
+  //   // Check if user is a seller or came from transactions page
+  //   if (currentUser?.isSeller) {
+  //     setCurrentPage("seller-dashboard");
+  //     setDashboardPage("transactions");
+  //   } else {
+  //     setCurrentPage("transactions");
+  //   }
+  //   setActiveEscrowId("");
+  // };
 
   // Handler for cart icon click - navigate to multi-item checkout
   const handleCartClick = () => {
@@ -391,9 +394,9 @@ export default function App() {
   };
 
   // Find the vendor information
-  const vendor = selectedVendor
-    ? mockVendors.find(v => v.id === selectedVendor)
-    : null;
+  // const vendor = selectedVendor
+  //   ? mockVendors.find(v => v.id === selectedVendor)
+  //   : null;
 
   // Render the appropriate page based on currentPage state
   const renderPage = () => {
@@ -416,40 +419,40 @@ export default function App() {
             />
           </div>
         );
-      case "products":
-        return (
-          <ProductsPage
-            onBackClick={handleBackToVendors}
-            vendorId={selectedVendor}
-            onLoginClick={handleLoginClick}
-            onProductSelect={handleProductSelect}
-            vendor={vendor}
-            onStartSellingClick={handleStartSellingClick}
-            onCartClick={handleCartClick}
-            user={currentUser}
-            onSignOut={handleSignOut}
-            onProfileClick={handleProfileClick}
-            onOrdersClick={handleOrdersClick}
-            onTransactionsClick={handleTransactionsClick}
-          />
-        );
-      case "product-detail":
-        return (
-          <ProductDetail
-            productId={selectedProduct}
-            onBackClick={handleBackToProducts}
-            onLoginClick={handleLoginClick}
-            onCartClick={handleCartClick}
-            vendorId={selectedVendor}
-            vendorName={vendor?.name}
-            onStartSellingClick={handleStartSellingClick}
-            user={currentUser}
-            onSignOut={handleSignOut}
-            onProfileClick={handleProfileClick}
-            onOrdersClick={handleOrdersClick}
-            onTransactionsClick={handleTransactionsClick}
-          />
-        );
+      // case "products":
+      //   return (
+      //     <ProductsPage
+      //       onBackClick={handleBackToVendors}
+      //       vendorId={selectedVendor}
+      //       onLoginClick={handleLoginClick}
+      //       onProductSelect={handleProductSelect}
+      //       vendor={vendor}
+      //       onStartSellingClick={handleStartSellingClick}
+      //       onCartClick={handleCartClick}
+      //       user={currentUser}
+      //       onSignOut={handleSignOut}
+      //       onProfileClick={handleProfileClick}
+      //       onOrdersClick={handleOrdersClick}
+      //       onTransactionsClick={handleTransactionsClick}
+      //     />
+      //   );
+      // case "product-detail":
+      //   return (
+      //     <ProductDetail
+      //       productId={selectedProduct}
+      //       onBackClick={handleBackToProducts}
+      //       onLoginClick={handleLoginClick}
+      //       onCartClick={handleCartClick}
+      //       vendorId={selectedVendor}
+      //       vendorName={vendor?.name}
+      //       onStartSellingClick={handleStartSellingClick}
+      //       user={currentUser}
+      //       onSignOut={handleSignOut}
+      //       onProfileClick={handleProfileClick}
+      //       onOrdersClick={handleOrdersClick}
+      //       onTransactionsClick={handleTransactionsClick}
+      //     />
+      //   );
       case "signin":
         return (
           <SignIn
@@ -483,33 +486,33 @@ export default function App() {
             onSkip={handleBusinessImagesSkip}
           />
         );
-      case "seller-dashboard":
-        return (
-          <SellerDashboard
-            businessName={businessName}
-            initialPage={dashboardPage}
-          />
-        );
-      case "escrow-portal":
-        return (
-          <EscrowPortal
-            escrowId={activeEscrowId}
-            onBack={handleBackFromEscrowPortal}
-            user={currentUser}
-          />
-        );
-      case "profile":
-        return (
-          <Profile
-            user={currentUser ? {
-              ...currentUser,
-              id: currentUser.id.toString(),
-              picture: currentUser.picture || currentUser.avatar || "",
-              isSeller: currentUser.isSeller ? true : undefined
-            } : null}
-            onBack={handleBackToVendors}
-          />
-        );
+      // case "seller-dashboard":
+      //   return (
+      //     <SellerDashboard
+      //       businessName={businessName}
+      //       initialPage={dashboardPage}
+      //     />
+      //   );
+      // case "escrow-portal":
+      //   return (
+      //     <EscrowPortal
+      //       escrowId={activeEscrowId}
+      //       onBack={handleBackFromEscrowPortal}
+      //       user={currentUser}
+      //     />
+      //   );
+      // case "profile":
+      //   return (
+      //     <Profile
+      //       user={currentUser ? {
+      //         ...currentUser,
+      //         id: currentUser.toString(),
+      //         picture: currentUser.picture || currentUser.avatar || "",
+      //         isSeller: currentUser.isSeller ? true : undefined
+      //       } : null}
+      //       onBack={handleBackToVendors}
+      //     />
+      //   );
       case "orders":
         return (
           <Orders
@@ -541,7 +544,7 @@ export default function App() {
       // setCurrentUser(user[0]?.details)
       if (user[0]?.details) {
         console.log('user details:', user[0].details);
-        const details = user[0].details;
+        const details = user[0].details as User;
         setCurrentUser({
           id: details?.id,
           name: details?.name,
@@ -555,24 +558,22 @@ export default function App() {
         setIsSellerFlow(status);
       }
       console.log('accounts',account.address)
+      console.log('status', status);
+      
     }
-  },[account, user])
+  },[account, user, status, setCurrentUser])
   return (
-    <ProductProvider>
-      <CartProvider>
-        <DialogProvider>
-          <Toaster position="top-right" closeButton richColors />
-          <div className="bg-slate-50 min-h-screen w-full">
-            {renderPage()}
+    <div>
+    <Toaster position="top-right" closeButton richColors />
+    <div className="bg-slate-50 min-h-screen w-full">
+      {renderPage()}
 
-            {/* Multi-item checkout modal */}
-            <MultiItemOrderSummaryModal
-              isOpen={isMultiCheckoutOpen}
-              onClose={() => setIsMultiCheckoutOpen(false)}
-            />
-          </div>
-        </DialogProvider>
-      </CartProvider>
-    </ProductProvider>
+      {/* Multi-item checkout modal */}
+      <MultiItemOrderSummaryModal
+        isOpen={isMultiCheckoutOpen}
+        onClose={() => setIsMultiCheckoutOpen(false)}
+      />
+    </div>
+    </div>
   );
 }

@@ -106,7 +106,7 @@ export function VendorShowcase({
         // onOrdersClick={onOrdersClick}
         // onTransactionsClick={onTransactionsClick}
       />
-      <HeroBanner onStartSellingClick={onStartSellingClick} />
+      <HeroBanner onStartSellingClick={()=>router.push("/selling")} />
       <div className="w-full">
         {/* Category filters */}
         <div className="flex flex-wrap gap-2 mb-6 overflow-x-auto pb-2">

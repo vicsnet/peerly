@@ -43,16 +43,16 @@ const DialogContent = React.forwardRef<
   const hasDescription = React.Children.toArray(children).some(
     child => React.isValidElement(child) && 
     (child.type === DialogDescription || 
-     (typeof child.type === 'function' && child.type.displayName === DialogDescription.displayName))
+     (typeof child.type === 'function' && 
+      (child.type as unknown as { displayName?: string }).displayName === DialogDescription.displayName))
   );
   
-  // Only register with context if there's no explicit description
-  let ariaDescribedBy = props["aria-describedby"];
+  const shouldRegisterDescription = !hasDescription && !props["aria-describedby"];
+  const registeredDescriptionId = useDialogDescription(fullDescriptionId, description);
   
-  if (!hasDescription && !ariaDescribedBy) {
-    // Register this dialog's description with context
-    useDialogDescription(fullDescriptionId, description);
-    ariaDescribedBy = fullDescriptionId;
+  let ariaDescribedBy = props["aria-describedby"];
+  if (shouldRegisterDescription) {
+    ariaDescribedBy = registeredDescriptionId;
   }
   
   return (

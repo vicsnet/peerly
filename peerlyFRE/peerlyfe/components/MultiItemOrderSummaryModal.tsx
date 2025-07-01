@@ -3,6 +3,7 @@ import svgPaths from "../imports/svg-bi1ja775vl";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useCart } from "../contexts/CartContext";
 import { toast } from "sonner";
+import type { CartItem } from '../contexts/CartContext';
 
 interface BuyNowProduct {
   id: number;
@@ -69,7 +70,8 @@ function BackgroundImage44({
   );
 }
 
-function BackgroundImage29({ children }: React.PropsWithChildren<{}>) {
+// Fixed: Add missing type for props and remove empty object type
+function BackgroundImage29({ children }: React.PropsWithChildren<unknown>) {
   return (
     <BackgroundImage61>
       <div className="box-border flex flex-col gap-2 items-start justify-start p-0 relative w-full">
@@ -79,20 +81,20 @@ function BackgroundImage29({ children }: React.PropsWithChildren<{}>) {
   );
 }
 
-function BackgroundImage14({ children }: React.PropsWithChildren<{}>) {
-  return (
-    <div className="relative shrink-0 size-6">
-      <svg
-        className="block size-full"
-        fill="none"
-        preserveAspectRatio="none"
-        viewBox="0 0 24 24"
-      >
-        {children}
-      </svg>
-    </div>
-  );
-}
+// function BackgroundImage14({ children }: React.PropsWithChildren<{}>) {
+//   return (
+//     <div className="relative shrink-0 size-6">
+//       <svg
+//         className="block size-full"
+//         fill="none"
+//         preserveAspectRatio="none"
+//         viewBox="0 0 24 24"
+//       >
+//         {children}
+//       </svg>
+//     </div>
+//   );
+// }
 
 type TextBackgroundImageProps = {
   text: string;
@@ -312,7 +314,7 @@ function EmptyCartState() {
 }
 
 function Carts({ cartItems, onRemoveItem, buyNowMode, buyNowProduct }: {
-  cartItems: any[];
+  cartItems: CartItem[];
   onRemoveItem: (id: number) => void;
   buyNowMode?: boolean;
   buyNowProduct?: BuyNowProduct;
@@ -343,7 +345,7 @@ function Carts({ cartItems, onRemoveItem, buyNowMode, buyNowProduct }: {
       <div className="box-border flex flex-col gap-4 items-start justify-start p-0 relative w-full">
         {cartItems.map((item) => (
           <WithAction 
-            key={`${item.id}-${JSON.stringify(item.variants || '')}`}
+            key={`${item.id}-${JSON.stringify((item as unknown as { variants?: unknown }).variants || '')}`}
             productImage={item.image}
             productName={item.name}
             totalPrice={item.price * item.quantity}
@@ -398,7 +400,7 @@ function Text4({ total }: { total: number }) {
 }
 
 function All({ cartItems, shippingCost, taxCost, serviceFee, buyNowMode, buyNowProduct }: {
-  cartItems: any[];
+  cartItems: CartItem[];
   shippingCost: number;
   taxCost: number;
   serviceFee: number;
@@ -425,7 +427,7 @@ function All({ cartItems, shippingCost, taxCost, serviceFee, buyNowMode, buyNowP
 }
 
 function Content({ cartItems, onRemoveItem, shippingCost, taxCost, serviceFee, buyNowMode, buyNowProduct, hasItems }: {
-  cartItems: any[];
+  cartItems: CartItem[];
   onRemoveItem: (id: number) => void;
   shippingCost: number;
   taxCost: number;
@@ -566,7 +568,7 @@ function Actions({ onCompletePurchase, hasItems }: {
 function Modal({ onClose, onCompletePurchase, cartItems, onRemoveItem, shippingCost, taxCost, serviceFee, buyNowMode, buyNowProduct }: {
   onClose: () => void;
   onCompletePurchase: () => void;
-  cartItems: any[];
+  cartItems: CartItem[];
   onRemoveItem: (id: number) => void;
   shippingCost: number;
   taxCost: number;
@@ -610,7 +612,7 @@ function Modal({ onClose, onCompletePurchase, cartItems, onRemoveItem, shippingC
 }
 
 // Function to calculate dynamic fees based on cart contents
-function calculateDynamicFees(cartItems: any[], buyNowMode: boolean, buyNowProduct?: BuyNowProduct) {
+function calculateDynamicFees(cartItems: CartItem[], buyNowMode: boolean, buyNowProduct?: BuyNowProduct) {
   let totalShipping = 0;
   let totalTaxes = 0;
   let totalServiceFees = 0;
@@ -627,7 +629,7 @@ function calculateDynamicFees(cartItems: any[], buyNowMode: boolean, buyNowProdu
     totalServiceFees = fees.serviceFee;
   } else if (cartItems.length > 0) {
     // Regular cart mode - calculate fees for each vendor
-    const vendorGroups = cartItems.reduce((groups: Record<number, any[]>, item) => {
+    const vendorGroups = cartItems.reduce((groups: Record<number, CartItem[]>, item) => {
       const vendorId = item.vendorId;
       if (!groups[vendorId]) {
         groups[vendorId] = [];

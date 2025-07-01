@@ -10,10 +10,12 @@ contract PeerlyTrust {
     address public peerlyEscrow;
 
     mapping(address shopOwner => uint256 totalReceived) public received;
+
     mapping(address shopOwner => uint256 totalReceived) public trustBalance;
 
     mapping(uint256 productId => mapping(uint256 orderId => mapping(address shopOwner => uint256 amount)))
         public orderPurchasedAmount;
+
     mapping(address productBuyer => mapping(uint256 productId => mapping(uint256 orderId => uint256 amount)))
         public productBuyerOrderAmount;
 
@@ -32,6 +34,7 @@ contract PeerlyTrust {
         address productBuyer
     ) public {
         IERC20(tokenAddress).transferFrom(productBuyer, address(this), amount);
+        
         received[shopOwner] += amount;
         orderPurchasedAmount[productId][orderId][shopOwner] += amount;
         productBuyerOrderAmount[productBuyer][productId][orderId] += amount;
@@ -55,6 +58,8 @@ contract PeerlyTrust {
         uint256 amountToSend = amount - feeAmount;
 
         IERC20(tokenAddress).transfer(shopOwner, amountToSend);
+
+        //what did i do here
         trustBalance[shopOwner] += feeAmount;
 
         // emit event
@@ -76,6 +81,8 @@ contract PeerlyTrust {
         ];
         require(amount > 0, "No funds to return");
         IERC20(tokenAddress).transfer(productBuyer, amount);
+
+        // not completed
         // emit event
     }
     function getBalance(address tokenAddress) public view returns (uint256) {

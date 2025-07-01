@@ -7,6 +7,7 @@ import imgIconJpeg from "figma:asset/01971d9e3f08c00bf48fe47fac92bfaf1c19a0ad.pn
 import imgIconJpeg1 from "figma:asset/2799d4a125449779453f25b39daa66c6de88d515.png";
 import imgCoinbaseIconPng from "figma:asset/c2ab0992ab80f1a96d7e985b4fc6533462550d4f.png";
 import { imgGroup } from "./svg-axr3f";
+import Image from "next/image";
 type BackgroundImage348Props = {
   additionalClassNames?: string[];
 };
@@ -659,8 +660,8 @@ function Button() {
 function Avatar() {
   return (
     <div className="relative shrink-0 size-10" data-name="avatar">
-      <img
-        alt
+      <Image
+        alt=''
         className="block max-w-none size-full"
         height="40"
         src={imgAvatar}

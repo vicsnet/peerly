@@ -80,7 +80,8 @@ contract PeerlyShop {
         string[] productImage,
         uint256 price,
         uint256 totalStock,
-        uint256 sold
+        uint256 sold,
+        string specification
     );
 
     event productUpdated(
@@ -177,7 +178,8 @@ contract PeerlyShop {
             _productImage,
             _price,
             _totalStock,
-            0
+            0,
+            _specification
         );
     }
 
@@ -196,31 +198,67 @@ contract PeerlyShop {
     /// @param _productId The id of the product whict is the productCount
     /// @param _newPrice The new price of the product
 
-    function updateProductPrice(uint256 _productId, uint256 _newPrice) public {
+    /// @notice Update the price and stock (including sizes) of a product
+    /// @dev Allows the owner to update the price, total stock, and size quantities of a product
+    /// @param _productId The id of the product to update
+    /// @param _newPrice The new price of the product
+    /// @param _newTotalStock The new total stock of the product
+    /// @param _sizes The array of size names to update
+    /// @param _quantities The array of quantities for each size
+    function updateProduct(
+        uint256 _productId,
+        uint256 _newPrice,
+        uint256 _newTotalStock,
+        string[] memory _sizes,
+        uint256[] memory _quantities
+    ) public {
         require(
             msg.sender == owner,
-            "Only the owner can update the price of a product"
+            "Only the owner can update the product"
         );
+        if(_newPrice > 0){
         require(products[_productId].price != 0, "No product");
-        // update the price of a product
+                // update the price and total stock
         products[_productId].price = _newPrice;
 
+        }else if(_newTotalStock > 0){
+        require(_sizes.length == _quantities.length, "Mismatch in sizes and quantities");
+        products[_productId].totalStock = _newTotalStock;
+        // update sizes and their quantities
+        // Clear existing sizes
+        delete products[_productId].sizes;
+
+        // Add new sizes and quantities
+        for (uint i = 0; i < _sizes.length; i++) {
+            products[_productId].sizes.push(
+                SizeStock({size: _sizes[i], quantity: _quantities[i]})
+            );
+        }
+        }else{
+            require(products[_productId].price != 0, "No product");
+            require(_sizes.length == _quantities.length, "Mismatch in sizes and quantities");
+            delete products[_productId].sizes;
+                    // Add new sizes and quantities
+        for (uint i = 0; i < _sizes.length; i++) {
+            products[_productId].sizes.push(
+                SizeStock({size: _sizes[i], quantity: _quantities[i]})
+            );
+        }
+
+        }
+
         string memory productName = products[_productId].productName;
-
-        string memory productDescription = products[_productId]
-            .productDescription;
-
+        string memory productDescription = products[_productId].productDescription;
         string[] memory productImage = products[_productId].productImage;
-
-        uint256 totalStock = products[_productId].totalStock;
         uint256 sold = products[_productId].sold;
+
         emit productUpdated(
             _productId,
             productName,
             productDescription,
             productImage,
             _newPrice,
-            totalStock,
+            _newTotalStock,
             sold
         );
     }

@@ -4,6 +4,7 @@ import imgAvatar from "figma:asset/b6003b2bab7e9044a0cdcfa3a882b6ffae4c8ff0.png"
 import imgImage from "figma:asset/6e4efb602de83ba81d065532203d6f1d1374a8ff.png";
 import imgImage1 from "figma:asset/f405e12dc8c15ed1474c1318f47ca279ef375e1f.png";
 import { imgGroup } from "./svg-s0g0i";
+import Image from "next/image";
 type BackgroundImage280Props = {
   additionalClassNames?: string[];
 };
@@ -289,7 +290,7 @@ function FieldBackgroundImageAndText({
   );
 }
 
-function BackgroundImageAndText1({ text }: BackgroundImageAndText1Props) {
+function BackgroundImageAndText1({ text }: BackgroundImageAndTextProps) {
   return (
     <div className="css-lqyxso font-['Inter:Semi_Bold',_sans-serif] font-semibold leading-[0] not-italic overflow-ellipsis overflow-hidden relative shrink-0 text-[18px] text-gray-900 text-left text-nowrap">
       <p className="[text-overflow:inherit] block leading-[28px] overflow-inherit whitespace-pre">
@@ -532,8 +533,8 @@ function Button1() {
 function Avatar() {
   return (
     <div className="relative shrink-0 size-10" data-name="avatar">
-      <img
-        alt
+      <Image
+        alt=''
         className="block max-w-none size-full"
         height="40"
         src={imgAvatar}

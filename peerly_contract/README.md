@@ -65,11 +65,17 @@ $ anvil --help
 $ cast --help
 ```
 
-0: contract PeerlyPond 0x0e42c919eF6A83b00081fDB08e9BA2b1cEa1D7F9
-1: contract PeerlyIdentityNFT 0x383C2914E4221f6C671D61B58bb606dAF9Da10b2
-2: contract PeerlyEscrow 0xf81041E635C8c4a00ae2971903e182b55EeB5634
-3: contract PeerlyTrust 0x0954Ac3f7896337932B244a51fb7B5466090fD7B
-4: contract PeerlyReceiptNFT 0x7Be2A5c11CA0A5d8905d3536D8861C7fE669Ba06
+
+
+0: contract PeerlyPond 0x4c9e8333Ee2Cd3D8a201a1E5D287000566Aa37BB
+1: contract PeerlyIdentityNFT 0x8cF95deb307cE5d803705981b7B068AD6Ba1E62a
+2: contract PeerlyEscrow 0x3511f2F0e664b8399a0BB72890eBD989aBE87578
+3: contract PeerlyTrust 0x993583D06733AD0da369c9aF8d22fb8195a4B283
+4: contract PeerlyReceiptNFT 0xD58bFe145a7B8729DeA4C1838a86363a58DC469a
 
 
 forge script script/DeployPeerlyPond.s.sol:DeployPeerlyPond     --rpc-url https://rpc.sepolia-api.lisk.com     --private-key 68e8918a4b906cedb4db9859a333d8f134f1f3f0bebefe7496df0fcf88925cbb     --broadcast     --verify --verifier blockscout --verifier-url https://sepolia-blockscout.lisk.com/api     --etherscan-api-key  1IRRXCD4Y4BBEK2WS5AGAGPH41R8BI3WRT -
+
+forge verify-contract 0x8C1f7918F9686eb7970E51aA5122b5C71962Ed98 ./src/PeerlyShop.sol:PeerlyShop --chain 4202 --watch --verifier blockscout --verifier-url https://sepolia-blockscout.lisk.com/api
+
+

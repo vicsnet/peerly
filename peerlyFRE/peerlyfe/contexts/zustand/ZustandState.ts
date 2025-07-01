@@ -16,6 +16,27 @@ type AppPage =
   | "order-detail"
   | "transactions";
 
+type DashboardPage = "home" | "products" | "product-details" | "orders" | "teams" | "transactions" | "settings";
+
+type SettingsTab = "profile" | "business" | "wallet" | "notifications";
+
+export const useDashboardPageState = create<{
+  currentPage: DashboardPage;
+  setCurrentPage: (page: DashboardPage) => void;
+}>((set) => ({
+  currentPage:'home',
+  setCurrentPage: (page) => set({ currentPage: page }),
+}))
+
+
+export const useDashboardTab = create<{
+  activeSettingsTab: SettingsTab;
+  setActiveSettingsTab: (page: SettingsTab) => void;
+}>((set) => ({
+  activeSettingsTab:'profile',
+  setActiveSettingsTab: (page) => set({ activeSettingsTab: page }),
+}))
+
 export const usePagesState = create<{
   currentPage: AppPage;
 
@@ -26,11 +47,19 @@ export const usePagesState = create<{
 }))
 
 export const useUser = create<{
-    currentUser: User | null;
-    setCurrentUser: (user: User | null) => void;
+  currentUser: User | null;
+  setCurrentUser: (user: User | null) => void;
 }>((set) => ({
-    currentUser:null,
-setCurrentUser:(user)=>set({currentUser:user}),
+  currentUser: null,
+  setCurrentUser: (user) => set({ currentUser: user }),
+}))
+
+export const useShop = create<{
+  shopAddress: string;
+  setShopAddress: (address: string) => void;
+}>((set) => ({
+  shopAddress: '',
+  setShopAddress: (address) => set({ shopAddress: address }),
 }))
 
 
@@ -39,7 +68,7 @@ type CartItem = {
   name: string;
   price: number;
   image: string;
-  vendorId: string ;
+  vendorId: string;
   vendorName: string;
   quantity: number;
   // You can add more fields as needed (e.g., variant, options)

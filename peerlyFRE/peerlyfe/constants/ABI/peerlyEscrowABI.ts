@@ -1,4 +1,4 @@
-export const peerlyEscrow = [
+export const peerlyEscrowABI = [
   {
     "inputs": [],
     "stateMutability": "nonpayable",

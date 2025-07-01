@@ -4,6 +4,7 @@ import imgAvatar from "figma:asset/5bee9393a6a3a30c7f2cff6dab100b8b77601184.png"
 import imgCoverImage from "figma:asset/866bf2f271640be2178c0ed55dc0a9c1d6612e20.png";
 import imgProfileImage from "figma:asset/51cef9ab45443a507f870addc84990d9da50204f.png";
 import { imgGroup } from "./svg-y85u7";
+import Image from "next/image";
 
 function InputwithbuttonBackgroundImage({
   children,
@@ -546,8 +547,8 @@ function Section() {
 function Avatar() {
   return (
     <div className="relative shrink-0 size-8" data-name="avatar">
-      <img
-        alt
+      <Image
+        alt=''
         className="block max-w-none size-full"
         height="32"
         loading="lazy"

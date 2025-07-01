@@ -7,7 +7,10 @@ interface CartIndicatorProps {
 }
 
 export function CartIndicator({ onClick }: CartIndicatorProps) {
-  const { items, totalItems } = useCart();
+  const { 
+    // items,
+     totalItems
+     } = useCart();
   const itemCount = totalItems;
 
   return (

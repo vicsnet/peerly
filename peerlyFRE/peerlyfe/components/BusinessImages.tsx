@@ -3,6 +3,7 @@ import { Upload } from "lucide-react";
 import { imgGroup } from "../imports/svg-pzlog";
 import svgPaths from "../imports/svg-fkxcq3hg3c";
 import { Button } from "./ui/button";
+import Image from "next/image";
 
 interface BusinessImagesProps {
   onBack: () => void;
@@ -43,6 +44,12 @@ export function BusinessImages({ onBack, onComplete, onSkip }: BusinessImagesPro
       reader.readAsDataURL(file);
     }
   };
+  if(logoFile){
+    console.log(logoFile)
+  }
+  if(coverFile){
+    console.log(coverFile)
+  }
 
   return (
     <div className="bg-slate-50 min-h-screen w-full">
@@ -118,9 +125,11 @@ export function BusinessImages({ onBack, onComplete, onSkip }: BusinessImagesPro
                 <div className="border border-dashed border-slate-300 rounded-md p-6">
                   {logoPreview ? (
                     <div className="relative">
-                      <img 
+                      <Image 
                         src={logoPreview} 
                         alt="Business logo preview" 
+                        width={24}
+                        height={24}
                         className="w-24 h-24 mx-auto object-cover rounded-md"
                       />
                       <button 
@@ -166,7 +175,7 @@ export function BusinessImages({ onBack, onComplete, onSkip }: BusinessImagesPro
                 <div className="border border-dashed border-slate-300 rounded-md p-6">
                   {coverPreview ? (
                     <div className="relative">
-                      <img 
+                      <Image 
                         src={coverPreview} 
                         alt="Business cover preview" 
                         className="w-full h-40 object-cover rounded-md"

@@ -694,8 +694,8 @@ export function EscrowPortal({ escrowId, onBack, user }: EscrowPortalProps) {
         isOpen={isReportIssueDialogOpen}
         onClose={() => setIsReportIssueDialogOpen(false)}
         onSubmit={handleReportIssueSubmit}
-        title={`Report an Issue with Transaction ${escrowData.id}`}
-        description="Describe the issue you're experiencing with this transaction. Our support team will review your report and contact you within 24 hours."
+        // title={`Report an Issue with Transaction ${escrowData.id}`}
+        // description="Describe the issue you're experiencing with this transaction. Our support team will review your report and contact you within 24 hours."
       />
     </div>
   );

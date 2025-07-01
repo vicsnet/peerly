@@ -6,26 +6,14 @@ import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
 
 import { cn } from "./utils";
 
-const DropdownMenu = React.forwardRef<
-  React.ElementRef<typeof DropdownMenuPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Root>
->(({ ...props }, ref) => (
-  <DropdownMenuPrimitive.Root ref={ref} data-slot="dropdown-menu" {...props} />
-));
-
+const DropdownMenu = (props: React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Root>) => (
+  <DropdownMenuPrimitive.Root data-slot="dropdown-menu" {...props} />
+);
 DropdownMenu.displayName = "DropdownMenu";
 
-const DropdownMenuPortal = React.forwardRef<
-  React.ElementRef<typeof DropdownMenuPrimitive.Portal>,
-  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Portal>
->(({ ...props }, ref) => (
-  <DropdownMenuPrimitive.Portal 
-    ref={ref} 
-    data-slot="dropdown-menu-portal" 
-    {...props} 
-  />
-));
-
+const DropdownMenuPortal = (props: React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Portal>) => (
+  <DropdownMenuPrimitive.Portal data-slot="dropdown-menu-portal" {...props} />
+);
 DropdownMenuPortal.displayName = "DropdownMenuPortal";
 
 const DropdownMenuTrigger = React.forwardRef<

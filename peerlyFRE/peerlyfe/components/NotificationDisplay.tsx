@@ -1,5 +1,5 @@
 import React from "react";
-import { SellerDashboard } from "../features/VendorSellingFeatures/SellerDashboardFeature/SellerDashboard";
+// import { SellerDashboard } from "../features/VendorSellingFeatures/SellerDashboardFeature/SellerDashboard";
 import { NotificationsDropdown } from "./NotificationsDropdown";
 import { Bell } from "lucide-react";
 import { Badge } from "./ui/badge";
@@ -37,7 +37,7 @@ export function NotificationDisplay() {
               </div>
               <h3 className="font-medium text-slate-900">No notifications</h3>
               <p className="text-sm text-slate-500 max-w-[250px] mx-auto mt-1">
-                You don't have any notifications yet.
+                You don&apos;t have any notifications yet.
               </p>
             </div>
           </div>

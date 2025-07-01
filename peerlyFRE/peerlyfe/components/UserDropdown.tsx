@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { User } from "@/types/user";
-import { useActiveAccount, useProfiles, useDisconnect } from "thirdweb/react";
+import Image from "next/image";
+// import { useActiveAccount, useProfiles, useDisconnect } from "thirdweb/react";
 
 interface UserDropdownProps {
   user: User;
@@ -281,10 +282,12 @@ export function UserDropdown({
         }}
         className="relative shrink-0 size-10 rounded-full overflow-hidden hover:ring-2 hover:ring-slate-200 transition-all"
       >
-        <img
-          alt={user.name}
+        <Image
+          alt={user?.name ?? ''}
           className="block w-full h-full object-cover"
-          src={user.picture}
+          src={user.picture ?? ''}
+          width={96}
+          height={96}
         />
       </button>
 

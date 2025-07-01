@@ -3,8 +3,8 @@ import { X } from "lucide-react";
 // import imgSymbolPng from "figma:asset/6b902610013a9c11fa62fab7fec58a4d2a35c9f2.png";
 // import imgLogoPng from "figma:asset/680449e5dac08f498764fbd6cda12356a66374b2.png";
 
-import { imgGroup } from "../imports/svg-5mh2g";
-import svgPaths from "../imports/svg-baymwh3e0j";
+// import { imgGroup } from "../imports/svg-5mh2g";
+// import svgPaths from "../imports/svg-baymwh3e0j";
 
 interface SignUpProps {
   onSignUp: () => void;
@@ -29,9 +29,9 @@ export function SignUp({ onSignUp, onSignIn, onClose, isSellerFlow = false }: Si
                     <div 
                       className="absolute inset-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px] mask-size-[30px_30px]" 
                       data-name="Group"
-                      style={{ maskImage: `url('${imgGroup}')` }}
+                      // style={{ maskImage: `url('${imgGroup}')` }}
                     >
-                      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 30 30">
+                      {/* <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 30 30">
                         <g id="Group">
                           <path
                             clipRule="evenodd"
@@ -41,7 +41,7 @@ export function SignUp({ onSignUp, onSignIn, onClose, isSellerFlow = false }: Si
                             id="Vector"
                           />
                         </g>
-                      </svg>
+                      </svg> */}
                     </div>
                   </div>
                 </div>
@@ -155,22 +155,22 @@ export function SignUp({ onSignUp, onSignIn, onClose, isSellerFlow = false }: Si
               {/* Social logins */}
               <div className="flex flex-col gap-3">
                 {/* Google button with correct icon */}
-                <button className="flex items-center justify-center gap-2 py-2 border border-slate-300 rounded-lg h-12">
+                {/* <button className="flex items-center justify-center gap-2 py-2 border border-slate-300 rounded-lg h-12">
                   <div 
                     className="bg-[50%_50%] bg-contain bg-no-repeat rounded shrink-0 size-6"
                     style={{ backgroundImage: `url('${imgSymbolPng}')` }}
                   />
                   <span className="text-[14px] font-medium">Sign in with Google</span>
-                </button>
+                </button> */}
                 
                 {/* Apple button with correct icon */}
-                <button className="flex items-center justify-center gap-2 py-2 border border-slate-300 rounded-lg h-12">
+                {/* <button className="flex items-center justify-center gap-2 py-2 border border-slate-300 rounded-lg h-12">
                   <div 
                     className="bg-[50%_50%] bg-contain bg-no-repeat rounded shrink-0 size-6"
                     style={{ backgroundImage: `url('${imgLogoPng}')` }}
                   />
                   <span className="text-[14px] font-medium">Sign in with Apple</span>
-                </button>
+                </button> */}
               </div>
             </div>
           </div>

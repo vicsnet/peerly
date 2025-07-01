@@ -119,6 +119,12 @@ export const peerlyShopABI = [
         "internalType": "uint256",
         "name": "sold",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "specification",
+        "type": "string"
       }
     ],
     "name": "productAdded",
@@ -539,11 +545,26 @@ export const peerlyShopABI = [
         "internalType": "uint256",
         "name": "_newPrice",
         "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_newTotalStock",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string[]",
+        "name": "_sizes",
+        "type": "string[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "_quantities",
+        "type": "uint256[]"
       }
     ],
-    "name": "updateProductPrice",
+    "name": "updateProduct",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   }
-] as const
+]as const

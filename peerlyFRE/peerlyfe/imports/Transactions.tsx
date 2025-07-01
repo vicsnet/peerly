@@ -2,6 +2,7 @@ import svgPaths from "./svg-fkaqesp56u";
 import clsx from "clsx";
 import imgAvatar from "figma:asset/5bee9393a6a3a30c7f2cff6dab100b8b77601184.png";
 import { imgGroup } from "./svg-uq25u";
+import Image from "next/image";
 
 function Scrolllistitem1({ children }: React.PropsWithChildren<{}>) {
   return (
@@ -741,8 +742,8 @@ function Section() {
 function Avatar() {
   return (
     <div className="relative shrink-0 size-8" data-name="avatar">
-      <img
-        alt
+      <Image
+        alt=''
         className="block max-w-none size-full"
         height="32"
         loading="lazy"

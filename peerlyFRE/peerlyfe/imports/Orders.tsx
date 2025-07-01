@@ -3,6 +3,7 @@ import clsx from "clsx";
 import imgAvatar from "figma:asset/b6003b2bab7e9044a0cdcfa3a882b6ffae4c8ff0.png";
 import imgImage from "figma:asset/6e4efb602de83ba81d065532203d6f1d1374a8ff.png";
 import { imgGroup } from "./svg-figqa";
+import Image from "next/image";
 
 function ContainerBackgroundImage({ children }: React.PropsWithChildren<{}>) {
   return (
@@ -348,8 +349,8 @@ function Button1() {
 function Avatar() {
   return (
     <div className="relative shrink-0 size-10" data-name="avatar">
-      <img
-        alt
+      <Image
+        alt=''
         className="block max-w-none size-full"
         height="40"
         src={imgAvatar}

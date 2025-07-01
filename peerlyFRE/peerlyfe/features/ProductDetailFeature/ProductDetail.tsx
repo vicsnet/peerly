@@ -276,14 +276,14 @@ export function ProductDetail({
       <div className="min-h-screen flex flex-col bg-slate-50">
         <div className="px-4 md:px-8 pt-6 max-w-[1440px] mx-auto w-full">
           <NavBar 
-            onLoginClick={onLoginClick} 
-            onStartSellingClick={onStartSellingClick} 
-            onCartClick={onCartClick} 
-            user={user}
-            onSignOut={onSignOut}
-            onProfileClick={onProfileClick}
-            onOrdersClick={onOrdersClick}
-            onTransactionsClick={onTransactionsClick}
+            // onLoginClick={onLoginClick} 
+            // onStartSellingClick={onStartSellingClick} 
+            // onCartClick={onCartClick} 
+            // user={user}
+            // onSignOut={onSignOut}
+            // onProfileClick={onProfileClick}
+            // onOrdersClick={onOrdersClick}
+            // onTransactionsClick={onTransactionsClick}
           />
         </div>
         <div className="flex-1 container mx-auto px-4 py-12 flex justify-center items-center">
@@ -298,14 +298,14 @@ export function ProductDetail({
       {/* Navigation */}
       <div className="px-4 md:px-8 pt-6 max-w-[1440px] mx-auto w-full">
         <NavBar 
-          onLoginClick={onLoginClick} 
-          onStartSellingClick={onStartSellingClick} 
-          onCartClick={onCartClick} 
-          user={user}
-          onSignOut={onSignOut}
-          onProfileClick={onProfileClick}
-          onOrdersClick={onOrdersClick}
-          onTransactionsClick={onTransactionsClick}
+          // onLoginClick={onLoginClick} 
+          // onStartSellingClick={onStartSellingClick} 
+          // onCartClick={onCartClick} 
+          // user={user}
+          // onSignOut={onSignOut}
+          // onProfileClick={onProfileClick}
+          // onOrdersClick={onOrdersClick}
+          // onTransactionsClick={onTransactionsClick}
         />
       </div>
 

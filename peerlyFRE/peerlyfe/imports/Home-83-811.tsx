@@ -2,6 +2,7 @@ import svgPaths from "./svg-g0tgza5xny";
 import clsx from "clsx";
 import imgAvatar from "figma:asset/5bee9393a6a3a30c7f2cff6dab100b8b77601184.png";
 import { imgGroup } from "./svg-rb9gc";
+import Image from "next/image";
 
 function Text15({ children }: React.PropsWithChildren<{}>) {
   return (
@@ -171,7 +172,7 @@ function Text13({ text, additionalClassNames = [] }: Text13Props) {
       )}
     >
       <p className="[text-overflow:inherit] block leading-[28px] overflow-inherit whitespace-pre">
-        {text1}
+        {text}
       </p>
     </div>
   );
@@ -575,8 +576,8 @@ function Section() {
 function Avatar() {
   return (
     <div className="relative shrink-0 size-8" data-name="avatar">
-      <img
-        alt
+      <Image
+        alt=''
         className="block max-w-none size-full"
         height="32"
         loading="lazy"
